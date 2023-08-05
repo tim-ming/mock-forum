@@ -1,8 +1,9 @@
-export interface Posts {
-  posts: Post[];
+export interface IPosts {
+  posts: IPost[];
   categories: string[];
 }
-export interface Post {
+
+export interface IPost {
   id: string;
   title: string;
   publishDate: string;

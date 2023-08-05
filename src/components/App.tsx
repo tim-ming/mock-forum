@@ -1,20 +1,23 @@
-import usePosts from './getPosts';
+import { Link, useLoaderData } from 'react-router-dom';
+import { IPosts } from 'src/types';
 
 function App() {
-  const posts = usePosts();
-  console.log(posts);
+  const posts = useLoaderData() as IPosts;
   return (
-    <div>
+    <main>
       {posts ? (
         posts.posts.map((post) => (
-          <div key={post.id}>
-            <h2>{post.title}</h2>
-          </div>
+          <Link key={post.id} to={`/posts/${post.id}`}>
+            <article>
+              <p>{post.author.name}</p>
+              <h1>{post.title}</h1>
+            </article>
+          </Link>
         ))
       ) : (
         <p>Loading...</p>
       )}
-    </div>
+    </main>
   );
 }
 
