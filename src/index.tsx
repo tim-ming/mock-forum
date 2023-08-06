@@ -16,37 +16,40 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
-import { Post } from './components/Post';
+import { PostDetailed } from './components/PostDetailed';
 import { IPost } from './types';
+import { Layout } from './components/Layout';
 // Configure nested routes with JSX
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route
-        path="/"
-        loader={async ({ params, request }) => {
-          // loaders can be async functions
-          const res = await fetch(`/api/posts/${params.id}`, {
-            signal: request.signal,
-          });
-          const data = await res.json();
-          return data;
-        }}
-        element={<App />}
-      ></Route>
-      <Route
-        path="/posts/:id"
-        element={<Post />}
-        loader={async ({ params, request }) => {
-          // loaders can be async functions
-          const res = await fetch(`/api/posts/${params.id}`, {
-            signal: request.signal,
-          });
-          const data = (await res.json()) as IPost;
-          return data;
-        }}
-      />
+      <Route element={<Layout />}>
+        <Route
+          path="/"
+          loader={async ({ params, request }) => {
+            // loaders can be async functions
+            const res = await fetch(`/api/posts`, {
+              signal: request.signal,
+            });
+            const data = await res.json();
+            return data;
+          }}
+          element={<App />}
+        ></Route>
+        <Route
+          path="/posts/:id"
+          element={<PostDetailed />}
+          loader={async ({ params, request }) => {
+            // loaders can be async functions
+            const res = await fetch(`/api/posts/${params.id}`, {
+              signal: request.signal,
+            });
+            const data = (await res.json()) as IPost;
+            return data;
+          }}
+        />
+      </Route>
     </>
   )
 );

@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --black: 0 0 0;
+  --white: 255 255 255;
+  --accent: 0 119 204;
+  --accent-200: 102 170 255;
+  --primary: var(--black);
+  --primary-200: 60 60 60;
+  --secondary: var(--white);
+  --secondary-200: 245 245 245;
+  --shadow20: rgba(0, 0, 0, 0.2);
+  --shadow10: rgba(0, 0, 0, 0.1);
+  --shadowLight20: rgba(255, 255, 255, 0.2);
+  --shadowLight10: rgba(255, 255, 255, 0.1);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
