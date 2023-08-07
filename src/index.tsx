@@ -12,6 +12,7 @@ import App from './components/App';
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  defer,
   Route,
   RouterProvider,
 } from 'react-router-dom';
@@ -27,26 +28,30 @@ const routes = createBrowserRouter(
       <Route element={<Layout />}>
         <Route
           path="/"
+          element={<App />}
           loader={async ({ params, request }) => {
             // loaders can be async functions
-            const res = await fetch(`/api/posts`, {
+            const data = fetch(`/api/posts`, {
               signal: request.signal,
+            }).then((d) => {
+              if (d.ok) return d.json() as Promise<IPost>;
+              else throw new Response(d.statusText, { status: d.status });
             });
-            const data = await res.json();
-            return data;
+            return defer({ data: data });
           }}
-          element={<App />}
         ></Route>
         <Route
           path="/posts/:id"
           element={<PostDetailed />}
           loader={async ({ params, request }) => {
             // loaders can be async functions
-            const res = await fetch(`/api/posts/${params.id}`, {
+            const data = fetch(`/api/posts/${params.id}`, {
               signal: request.signal,
+            }).then((d) => {
+              if (d.ok) return d.json() as Promise<IPost>;
+              else throw new Response(d.statusText, { status: d.status });
             });
-            const data = (await res.json()) as IPost;
-            return data;
+            return defer({ data: data });
           }}
         />
       </Route>

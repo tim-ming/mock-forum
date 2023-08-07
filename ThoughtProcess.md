@@ -12,6 +12,11 @@
 
 - Do basic requirements
 
+- Styling
+  - Google for inspiration
+  - TailwindCSS
+
 - Do additional exercises
   - Need react-router
   - Need framer-motion
+  - CSS pre-processor -> tailwind
