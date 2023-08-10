@@ -1,8 +1,3 @@
-export interface IPosts {
-  posts: IPost[];
-  categories: string[];
-}
-
 export interface IPost {
   id: string;
   title: string;

@@ -1,9 +1,12 @@
+// For component param typing
 import { FC } from 'react';
+
+// Include IPost type
 import { IPost } from 'src/types';
 
 export const Post: FC<{ post: IPost }> = ({ post }) => {
   return (
-    <article className="p-5 flex flex-col justify-between gap-8">
+    <article className="rounded-md hover:bg-secondary-200 p-5 flex flex-col justify-between gap-8">
       <div className="flex flex-col gap-4">
         <div className="justify-between flex items-center">
           <div className="flex gap-2 items-center">

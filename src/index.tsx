@@ -9,51 +9,42 @@ import './styles/index.css';
 
 // Include application component.
 import App from './components/App';
+
+// Include react router for client-side and nested routing.
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  defer,
   Route,
   RouterProvider,
+  useParams,
 } from 'react-router-dom';
 
-import { PostDetailed } from './components/PostDetailed';
-import { IPost } from './types';
+// Include Layout component.
 import { Layout } from './components/Layout';
-// Configure nested routes with JSX
 
+// Include PostDetailed component.
+import { PostDetailed } from './components/PostDetailed';
+
+// Include react-query for data fetching cache.
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+// Initialise query client.
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+      refetchOnMount: false,
+    },
+  },
+});
+
+// Create routes.
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route element={<Layout />}>
-        <Route
-          path="/"
-          element={<App />}
-          loader={async ({ params, request }) => {
-            // loaders can be async functions
-            const data = fetch(`/api/posts`, {
-              signal: request.signal,
-            }).then((d) => {
-              if (d.ok) return d.json() as Promise<IPost>;
-              else throw new Response(d.statusText, { status: d.status });
-            });
-            return defer({ data: data });
-          }}
-        ></Route>
-        <Route
-          path="/posts/:id"
-          element={<PostDetailed />}
-          loader={async ({ params, request }) => {
-            // loaders can be async functions
-            const data = fetch(`/api/posts/${params.id}`, {
-              signal: request.signal,
-            }).then((d) => {
-              if (d.ok) return d.json() as Promise<IPost>;
-              else throw new Response(d.statusText, { status: d.status });
-            });
-            return defer({ data: data });
-          }}
-        />
+        <Route path="/" element={<App />}></Route>
+        <Route path="/:id" element={<PostDetailed />} />
       </Route>
     </>
   )
@@ -61,7 +52,9 @@ const routes = createBrowserRouter(
 
 ReactDOM.render(
   <React.StrictMode>
-    <RouterProvider router={routes} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={routes} />
+    </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
