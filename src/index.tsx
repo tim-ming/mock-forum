@@ -23,7 +23,7 @@ import {
 import { Layout } from './components/Layout';
 
 // Include PostDetailed component.
-import { PostDetailed } from './components/PostDetailed';
+import { PostDetailed } from './components/[id]';
 
 // Include react-query for data fetching cache.
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';

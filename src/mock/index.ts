@@ -1,6 +1,7 @@
 import { createServer } from 'miragejs';
 import data from './data.json';
 import { IPost } from 'src/types';
+import { filterCategory } from './filters';
 
 // sort in descending order by publish date, ideally this would be done on the backend but let's not change the provided JSON
 data.posts.sort((a,b) => {
@@ -13,22 +14,22 @@ data.posts.sort((a,b) => {
   }
 })
 
-
-
 createServer({
   routes() {
     this.namespace = 'api';
 
+    // route for getting a single post by id
     this.get('/posts/:id', (_,request) => {
       const id = request.params.id
       const post = data.posts.find(post => post.id === id) as IPost
       return post
     });
 
-    this.get('/posts_categories',(_,request) => {
+    // route for getting all categories
+    this.get('/posts_categories',() => {
       // Get list of all categories for filtering
       const categories = data.posts.reduce((acc:string[], post) => {
-        post.categories.forEach(({id,name}) => {
+        post.categories.forEach(({name}) => {
           if (!acc.includes(name)) {
             acc.push(name);
           }
@@ -38,19 +39,10 @@ createServer({
       return categories
     })
 
+    // route for getting all posts
     this.get('/posts', (_,request) => {
-      // Default to 10 posts per page
-      let limit = 10
-
-      // Default to 0 offset (i.e. the first {limit} posts)
-      let offset = 0
-
-      let query = request.queryParams
-
-      if (query){
-        limit = query.limit ? parseInt(query.limit) : limit
-        offset = query.offset ? parseInt(query.offset) : offset
-      }
+      // Default to 10 posts per load
+      const postsPerLoad = 10
 
       type queryObject = {
         [key:string]: string[]
@@ -66,17 +58,25 @@ createServer({
         return acc;
       },{} as queryObject)
 
-      // Filter by category if provided
-      function filterCategory(posts: IPost[]):IPost[] {
-        if (queryParams.category) {
-          // Filter posts by category, inclusive
-          return posts.filter((post)=>queryParams.category.some(qCategory=>post.categories.map((category)=>category.name).includes(qCategory)))
-        } else{
-          return posts
-        }
-      }
+      // Filter posts by categories, inclusive
+      const filteredPosts = filterCategory(data.posts,queryParams.category)
 
-      return filterCategory(data.posts).slice(offset,offset+limit)
+      const postCount = filteredPosts.length
+      const cursor = queryParams.cursor ? parseInt(queryParams.cursor[0]) : 0
+      const [start, end] = (() => {
+        if (postCount < postsPerLoad) {
+          return [0, postsPerLoad]
+        } else {
+          return [cursor * postsPerLoad, (cursor + 1) * postsPerLoad];
+        }
+      })();
+
+      const posts = filteredPosts.slice(start,end)
+
+      return {
+        posts,
+        nextCursor: (cursor+1)*postsPerLoad < postCount ? cursor+1 : null
+      }
     });
   },
 });

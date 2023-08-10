@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import { SetURLSearchParams, useSearchParams } from 'react-router-dom';
 
 /**
- * Toggles a filter key/value pair.
+ * Toggles a filter key/value pair. Auto-sorts query params to ensure cache hits on different orderings.
  * @param key key of the filter
  * @param value value of the filter
  */

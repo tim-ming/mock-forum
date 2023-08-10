@@ -78,55 +78,53 @@ const Content = () => {
       ) : (
         <article className="flex flex-col justify-between gap-8">
           <div className="flex flex-col gap-6">
-            <div className="justify-between flex items-center">
-              <div className="flex gap-6 flex-col justify-center">
-                <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
-                  {query.data.title}
-                </h1>
-                <div className="flex flex-col gap-2">
-                  <time className="italic text-primary-200 text-sm pl-[2px]">
-                    Published on{' '}
-                    {new Date(query.data.publishDate)
-                      .toLocaleDateString('en-US', {
-                        day: 'numeric',
-                        month: 'short',
-                        year: 'numeric',
-                      })
-                      .replace(',', '')}
-                  </time>
-                  <div className="flex items-center gap-2">
-                    <img
-                      className="rounded-full h-12 w-12"
-                      src={query.data.author.avatar}
-                      alt="author"
-                    ></img>
-                    <div className="flex flex-col gap-2">
-                      <address className="flex gap-2">
-                        <p className="font-medium">{query.data.author.name}</p>
-                      </address>
-                    </div>
+            <div className="flex gap-6 flex-col justify-center">
+              <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
+                {query.data.title}
+              </h1>
+              <div className="flex flex-col gap-2">
+                <time className="italic text-primary-200 text-sm pl-[2px]">
+                  Published on{' '}
+                  {new Date(query.data.publishDate)
+                    .toLocaleDateString('en-US', {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric',
+                    })
+                    .replace(',', '')}
+                </time>
+                <div className="flex items-center gap-2">
+                  <img
+                    className="rounded-full h-12 w-12"
+                    src={query.data.author.avatar}
+                    alt="author"
+                  ></img>
+                  <div className="flex flex-col gap-2">
+                    <address className="flex gap-2">
+                      <p className="font-medium">{query.data.author.name}</p>
+                    </address>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 text-primary-200">
-                  <ul className="flex gap-2 text-xs flex-wrap">
-                    {query.data.categories.map((category) => (
-                      <li
-                        className="px-2 py-1 rounded-full bg-shadow10"
-                        key={category.id}
-                      >
-                        {category.name}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              </div>
+              <div className="flex items-center gap-2 text-primary-200">
+                <ul className="flex gap-2 text-xs flex-wrap">
+                  {query.data.categories.map((category) => (
+                    <li
+                      className="px-2 py-1 rounded-full bg-shadow10"
+                      key={category.id}
+                    >
+                      {category.name}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-            <hr className="border-t-shadow20"></hr>
-            <div className="flex flex-col gap-8">
-              <p className="text-primary-200 leading-tight whitespace-pre-line">
-                {query.data.summary + ' ' + dummyText}
-              </p>
-            </div>
+          </div>
+          <hr className="border-t-shadow20"></hr>
+          <div className="flex flex-col gap-8">
+            <p className="text-primary-200 leading-tight whitespace-pre-line">
+              {query.data.summary + ' ' + dummyText}
+            </p>
           </div>
         </article>
       )}

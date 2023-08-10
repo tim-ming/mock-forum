@@ -13,6 +13,11 @@ export interface IPost {
   }[];
 }
 
+export interface IPosts {
+  posts: IPost[];
+  nextCursor: number;
+}
+
 
 // {
 //   "id": "146b8632-ab20-479c-a67d-3cd9f50231e8",
