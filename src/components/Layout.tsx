@@ -1,11 +1,12 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
 
 export const Layout = () => {
   return (
     <>
-      <div className="mx-auto max-w-[60rem] pt-8 pb-20">
+      <main className="mx-auto max-w-[60rem] pt-8 pb-20">
+        <ScrollRestoration />
         <Outlet />
-      </div>
+      </main>
     </>
   );
 };
