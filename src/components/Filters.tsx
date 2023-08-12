@@ -51,8 +51,8 @@ const FilterButton: FC<{
       className={`flex ${
         isActive
           ? 'border-accent bg-accent-200 text-secondary'
-          : 'border-transparent bg-shadow10 hover:bg-shadow20'
-      } text-sm px-3 py-1 rounded-full border-[1px] transition-colors duration-100`}
+          : 'border-transparent bg-primary/10 hover:bg-primary/20'
+      } text-[0.8rem] sm:text-sm text-primary-200 px-[0.5rem] py-[0.2rem] sm:px-[0.9rem] sm:py-[0.4rem] whitespace-nowrap rounded-full border-[1px] transition-colors duration-100`}
       onClick={() =>
         toggleFilter(filterKey, filterValue, searchParams, setSearchParams)
       }
@@ -67,17 +67,14 @@ export const Filter: FC<{ filtersKey: string; filters: string[] }> = ({
   filters,
 }) => {
   return (
-    <div className="flex flex-col">
-      <p>Filter by category</p>
-      <div className="flex flex-wrap gap-2">
-        {filters.map((filterValue, key) => (
-          <FilterButton
-            key={key}
-            filterKey={filtersKey}
-            filterValue={filterValue}
-          />
-        ))}
-      </div>
+    <div className="flex gap-[0.3rem] sm:gap-2 flex-wrap">
+      {filters.map((filterValue, key) => (
+        <FilterButton
+          key={key}
+          filterKey={filtersKey}
+          filterValue={filterValue}
+        />
+      ))}
     </div>
   );
 };

@@ -11,10 +11,6 @@
   --primary-200: 60 60 60;
   --secondary: var(--white);
   --secondary-200: 236 236 236;
-  --shadow20: rgba(0, 0, 0, 0.2);
-  --shadow10: rgba(0, 0, 0, 0.1);
-  --shadowLight20: rgba(255, 255, 255, 0.2);
-  --shadowLight10: rgba(255, 255, 255, 0.1);
 }
 
 body {

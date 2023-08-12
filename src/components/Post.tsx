@@ -6,30 +6,30 @@ import { IPost } from 'src/types';
 
 export const Post: FC<{ post: IPost }> = ({ post }) => {
   return (
-    <article className="rounded-md hover:bg-secondary-200 p-5 flex flex-col justify-between gap-8">
+    <article className="w-full shadow-sm border-shadow10 border-[1px] rounded-md hover:bg-secondary-200 p-5 flex flex-col justify-between gap-8">
       <div className="flex flex-col gap-4">
         <div className="justify-between flex items-center">
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center whitespace-nowrap overflow-hidden">
             <img
               className="rounded-full h-10"
               src={post.author.avatar}
               alt="author"
             ></img>
-            <div className="flex flex-col gap-2">
-              <address className="text-sm not-italic flex gap-2">
-                <p className="font-medium">{post.author.name}</p>
-                <p>·</p>
-                <time className="text-sm text-primary-200">
-                  {new Date(post.publishDate)
-                    .toLocaleDateString('en-US', {
-                      day: 'numeric',
-                      month: 'short',
-                      year: 'numeric',
-                    })
-                    .replace(',', '')}
-                </time>
-              </address>
-            </div>
+            <address className="text-sm items-center overflow-hidden not-italic flex gap-2">
+              <p className="font-medium break-all whitespace-nowrap overflow-hidden text-ellipsis">
+                {post.author.name}
+              </p>
+              <p>·</p>
+              <time className="text-sm text-primary-200 whitespace-nowrap overflow-hidden text-ellipsis">
+                {new Date(post.publishDate)
+                  .toLocaleDateString('en-US', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                  })
+                  .replace(',', '')}
+              </time>
+            </address>
           </div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -58,12 +58,9 @@ export const Post: FC<{ post: IPost }> = ({ post }) => {
         </div>
       </div>
       <div className="flex flex-col">
-        <ul className="flex gap-2 text-xs md:text-sm flex-wrap">
+        <ul className="flex gap-2 text-xs flex-wrap">
           {post.categories.map((category) => (
-            <li
-              className="px-3 py-1 rounded-full bg-shadow10"
-              key={category.id}
-            >
+            <li className="px-2 py-1 rounded-lg bg-primary/5" key={category.id}>
               {category.name}
             </li>
           ))}

@@ -16,6 +16,7 @@ data.posts.sort((a,b) => {
 
 createServer({
   routes() {
+    this.timing = 800
     this.namespace = 'api';
 
     // route for getting a single post by id

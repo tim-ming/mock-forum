@@ -38,7 +38,7 @@ Forked from https://github.com/lizardglobal/assessment
 - [x] Implement a category filter - this can be single or multi-select.
   - used select chips
 - [x] Implement pagination - this can be traditional numbered pages or "load more".
-  - ?react-query + miragejs
+  - react-query + miragejs
 - [x] Use semantic markup where possible.
   - !attempted, need to double check
 - [x] Create a responsive layout with HTML and CSS.
@@ -50,14 +50,14 @@ Forked from https://github.com/lizardglobal/assessment
   - used react-router
 - [x] Persist filter state in the query string.
   - used react-query
-- [ ] Include animated transitions between application state, e.g. when filtering.
-  - ?framer-motion
+- [x] Include animated transitions between application state, e.g. when filtering.
+  - framer-motion
 - [x] Convert the application to use TypeScript instead of JavaScript.
   - done
 - [x] Use a CSS preprocessor or CSS-in-JS rather than plain CSS.
-  - !used TailwindCSS
+  - used TailwindCSS
 
 #### TODO
 
 - [ ] Add sufficient documentation
-- [ ] Skeleton loader
+- [ ] Reorganize file structure
