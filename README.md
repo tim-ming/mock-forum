@@ -1,5 +1,7 @@
 View it here: https://lizardglobalassessment.pages.dev/
 
+### Workflow
+
 - Get rough idea of what to do, skimming through (in order):
   - Requirements
   - Additional exericses
