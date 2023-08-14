@@ -16,7 +16,7 @@ data.posts.sort((a,b) => {
 
 createServer({
   routes() {
-    this.timing = 800
+    this.timing = 900
     this.namespace = 'api';
 
     // route for getting a single post by id
@@ -63,7 +63,11 @@ createServer({
       const filteredPosts = filterCategory(data.posts,queryParams.category)
 
       const postCount = filteredPosts.length
+
+      // Get cursor from query params, default to 0
       const cursor = queryParams.cursor ? parseInt(queryParams.cursor[0]) : 0
+
+      // Get start and end indices for posts to return
       const [start, end] = (() => {
         if (postCount < postsPerLoad) {
           return [0, postsPerLoad]

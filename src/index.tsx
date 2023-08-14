@@ -7,8 +7,9 @@ import './mock';
 // Include styles.
 import './styles/index.css';
 
-// Include application component.
-import App from './components/App';
+// Include routes.
+import PageIndex from './routes/index/Page';
+import PageId from './routes/[id]/Page';
 
 // Include react router for client-side and nested routing.
 import {
@@ -16,23 +17,19 @@ import {
   createRoutesFromElements,
   Route,
   RouterProvider,
-  useParams,
 } from 'react-router-dom';
 
 // Include Layout component.
-import { Layout } from './components/Layout';
-
-// Include PostDetailed component.
-import { PostDetailed } from './components/[id]';
+import { Layout } from './layout/Layout';
 
 // Include react-query for data fetching cache.
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-// Initialise query client.
+// Initialise query client for caching.
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: Infinity,
+      staleTime: 60 * 1000,
       refetchOnMount: false,
     },
   },
@@ -43,8 +40,8 @@ const routes = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route element={<Layout />}>
-        <Route path="/" element={<App />}></Route>
-        <Route path="/:id" element={<PostDetailed />} />
+        <Route path="/" element={<PageIndex />}></Route>
+        <Route path="/:id" element={<PageId />} />
       </Route>
     </>
   )

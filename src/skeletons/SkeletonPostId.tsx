@@ -1,6 +1,10 @@
 import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
-const SkeletonDetailedPost = () => {
+/**
+ * Skeleton loader for post id component.
+ */
+const SkeletonPostId = () => {
   return (
     <div className="flex flex-col gap-8 w-full">
       <div className="flex flex-col gap-4 w-full">
@@ -38,4 +42,4 @@ const SkeletonDetailedPost = () => {
   );
 };
 
-export default SkeletonDetailedPost;
+export default SkeletonPostId;

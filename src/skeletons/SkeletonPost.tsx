@@ -1,5 +1,9 @@
 import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
+/**
+ * Skeleton loader for post component.
+ */
 const SkeletonPost = () => {
   return (
     <div className="rounded shadow-sm border-primary/5 border-[1px] p-4">

@@ -2,19 +2,15 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 // Link component and search params hook (to get post ID)
-import { useSearchParams, Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
-// Include LoadingSpinner component
-import LoadingSpinner from './LoadingSpinner';
-import 'react-loading-skeleton/dist/skeleton.css';
-
-import { Button } from './Button';
+import { getPosts } from 'src/helpers/fetchers';
 import { Post } from './Post';
-import { getPosts } from './fetchers';
 
-import SkeletonPost from './SkeletonPost';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FC } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import SkeletonPost from 'src/skeletons/SkeletonPost';
+import LoadMore from 'src/atoms/LoadMore';
+import LoadingSpinner from 'src/atoms/LoadingSpinner';
 
 const Posts = () => {
   const [queryParams] = useSearchParams();
@@ -69,7 +65,9 @@ const Posts = () => {
           <LoadMore
             isFetchingNextPage={isFetchingNextPage}
             hasNextPage={hasNextPage}
-            fetchNextPage={fetchNextPage}
+            handleClick={fetchNextPage}
+            LoadingComponent={<LoadingComponent />}
+            EndComponent={<EndComponent />}
           />
         </>
       )}
@@ -77,52 +75,44 @@ const Posts = () => {
   );
 };
 
-interface LoadMoreProps {
-  isFetchingNextPage: boolean;
-  hasNextPage?: boolean;
-  fetchNextPage: () => void;
-}
+const LoadingComponent = () => {
+  return (
+    <div className="flex flex-col w-full items-center justify-center gap-2">
+      <LoadingSpinner />
+      <p>Loading more posts...</p>
+    </div>
+  );
+};
 
-const LoadMore: FC<LoadMoreProps> = ({
-  isFetchingNextPage,
-  hasNextPage,
-  fetchNextPage,
-}) => {
+const EndComponent = () => {
   return (
     <>
-      {isFetchingNextPage ? (
-        <div className="flex flex-col w-full items-center justify-center gap-2">
-          <LoadingSpinner />
-          <p>Loading more posts...</p>
-        </div>
-      ) : (
-        <div className="flex items-center flex-col justify-center w-full gap-4">
-          {hasNextPage ? (
-            <Button onClick={() => fetchNextPage()} disabled={!hasNextPage}>
-              Load more
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-6 h-6 ml-1"
-              >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </Button>
-          ) : (
-            <>
-              <hr className="w-full border-t-[1px] border-primary/20" />
-              <p>No more posts</p>
-            </>
-          )}
-        </div>
-      )}
+      <hr className="w-full border-t-[1px] border-primary/20" />
+      <p>No more posts</p>
+      <button
+        className="text-accent gap-1 hover:border-b-[1px] border-accent flex items-center"
+        onClick={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          });
+        }}
+      >
+        Back to top
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </button>
     </>
   );
 };

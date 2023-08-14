@@ -1,3 +1,6 @@
+/**
+ * A loading spinner atom.
+ */
 export default function LoadingSpinner() {
   return (
     <svg

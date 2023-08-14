@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 
-const BackToTop = () => {
+/**
+ * Hook to check if the user has scrolled past the height of the screen.
+ * @returns true if the user has scrolled past the height of the screen
+ */
+const useVisibleScreenHeight = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -15,6 +19,14 @@ const BackToTop = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  return isVisible;
+};
+
+/**
+ * Back to top atom. Scrolls to top of page when clicked.
+ */
+const BackToTop = () => {
+  const visible = useVisibleScreenHeight();
 
   const handleClick = () => {
     window.scrollTo({
@@ -26,7 +38,7 @@ const BackToTop = () => {
   return (
     <button
       className={`fixed bottom-6 right-6 bg-secondary/50 p-3 shadow-lg rounded-full ${
-        isVisible ? 'opacity-100' : 'opacity-0'
+        visible ? 'opacity-100' : 'opacity-0'
       } transition-opacity duration-500`}
       onClick={handleClick}
     >

@@ -36,10 +36,17 @@ function toggleFilter(
   setSearchParams(searchParams);
 }
 
-const FilterButton: FC<{
+interface FilterButtonProps {
   filterKey: string;
   filterValue: string;
-}> = ({ filterKey, filterValue }) => {
+}
+
+/**
+ * Filter button component.
+ * @param filterKey key of the filter
+ * @param filterValue value of the filter
+ */
+const FilterButton: FC<FilterButtonProps> = ({ filterKey, filterValue }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const isActive = useMemo(
     () => searchParams.getAll(filterKey).includes(filterValue),
@@ -62,10 +69,17 @@ const FilterButton: FC<{
   );
 };
 
-export const Filter: FC<{ filtersKey: string; filters: string[] }> = ({
-  filtersKey,
-  filters,
-}) => {
+interface FilterProps {
+  filtersKey: string;
+  filters: string[];
+}
+
+/**
+ * Filter component with select chips.
+ * @param filtersKey key of the filter
+ * @param filters values of the filter
+ */
+const Filter: FC<FilterProps> = ({ filtersKey, filters }) => {
   return (
     <div className="flex gap-[0.3rem] sm:gap-2 flex-wrap">
       {filters.map((filterValue, key) => (
@@ -78,3 +92,5 @@ export const Filter: FC<{ filtersKey: string; filters: string[] }> = ({
     </div>
   );
 };
+
+export default Filter;

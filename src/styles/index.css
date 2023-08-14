@@ -5,8 +5,8 @@
 :root {
   --black: 0 0 0;
   --white: 255 255 255;
-  --accent: 0 119 204;
-  --accent-200: 102 170 255;
+  --accent: 7 176 86;
+  --accent-200: 45 196 111;
   --primary: var(--black);
   --primary-200: 60 60 60;
   --secondary: var(--white);

@@ -1,10 +1,13 @@
 // Hook to get query data
 import { useQuery } from '@tanstack/react-query';
 
-import { Filter } from './Filters';
-import LoadingSpinner from './LoadingSpinner';
-import { getCategories } from './fetchers';
+import Filter from './Filters';
+import LoadingSpinner from 'src/atoms/LoadingSpinner';
+import { getCategories } from '../helpers/fetchers';
 
+/**
+ * Categories filter component.
+ */
 const Categories = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['categories'],

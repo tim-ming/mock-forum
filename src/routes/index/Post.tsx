@@ -1,5 +1,6 @@
 // For component param typing
 import { FC } from 'react';
+import CategoryTag from 'src/atoms/CategoryTag';
 
 // Include IPost type
 import { IPost } from 'src/types';
@@ -60,9 +61,7 @@ export const Post: FC<{ post: IPost }> = ({ post }) => {
       <div className="flex flex-col">
         <ul className="flex gap-2 text-xs flex-wrap">
           {post.categories.map((category) => (
-            <li className="px-2 py-1 rounded-lg bg-primary/5" key={category.id}>
-              {category.name}
-            </li>
+            <CategoryTag key={category.id} categoryName={category.name} />
           ))}
         </ul>
       </div>
