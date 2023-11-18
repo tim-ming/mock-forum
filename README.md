@@ -1,5 +1,7 @@
-View it here: https://lizardglobalassessment.pages.dev/
-
+# Lizard Forum
+Mock-up forum with pagination & caching.
+[View it here](https://lizardglobalassessment.pages.dev/).
+<br>
 ### Workflow
 
 - Get rough idea of what to do, skimming through (in order):
