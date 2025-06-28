@@ -25,7 +25,7 @@ const PostId = () => {
           <>
             <div className="flex flex-col gap-6">
               <div className="flex gap-6 flex-col justify-center">
-                <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
+                <h1 className="text-3xl sm:text-4xl font-semibold leading-tight">
                   {query.data.title}
                 </h1>
                 <div className="flex flex-col gap-2">

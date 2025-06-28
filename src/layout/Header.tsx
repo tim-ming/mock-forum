@@ -4,7 +4,7 @@
 const Header = ({ ...props }) => {
   return (
     <header {...props}>
-      <p className="text-2xl font-medium">Lizard Global Forum</p>
+      <p className="text-2xl font-medium">Mock Forum</p>
     </header>
   );
 };

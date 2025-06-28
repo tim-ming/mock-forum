@@ -50,7 +50,7 @@ export const Post: FC<{ post: IPost }> = ({ post }) => {
         </div>
 
         <div className="flex flex-col gap-3">
-          <h1 className="text-xl font-bold leading-tight line-clamp-2">
+          <h1 className="text-xl font-semibold leading-tight line-clamp-2">
             {post.title}
           </h1>
           <p className="text-primary-200 leading-tight line-clamp-2">
@@ -59,7 +59,7 @@ export const Post: FC<{ post: IPost }> = ({ post }) => {
         </div>
       </div>
       <div className="flex flex-col">
-        <ul className="flex gap-2 text-xs flex-wrap">
+        <ul className="flex gap-2 text-xs flex-wrap text-neutral-600 tracking-wide">
           {post.categories.map((category) => (
             <CategoryTag key={category.id} categoryName={category.name} />
           ))}
