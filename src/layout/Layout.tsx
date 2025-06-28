@@ -10,7 +10,7 @@ export const Layout = () => {
     <>
       <div className="shadow-md">
         <IndexWrapper>
-          <Header className="py-6" />
+          <Header />
         </IndexWrapper>
       </div>
       <main>
